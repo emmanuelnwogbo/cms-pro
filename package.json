@@ -1,0 +1,43 @@
+{
+  "name": "cms-pro",
+  "version": "1.0.0",
+  "description": "Content Management System for my front-end projects",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "babel-node spec/run.js",
+    "test-watch": "nodemon --exec npm run test",
+    "dev": "nodemon server/index --exec babel-node",
+    "build": "babel server -d build",
+    "prod": "node build/index.js",
+    "start": "npm run build && npm run prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmanuelnwogbo/cms-pro.git"
+  },
+  "author": "Emmanuel <emmanwogbo20@yahoo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emmanuelnwogbo/cms-pro/issues"
+  },
+  "homepage": "https://github.com/emmanuelnwogbo/cms-pro#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "lodash": "^4.17.10",
+    "validator": "^10.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "jasmine": "^3.1.0",
+    "nodemon": "^1.17.5",
+    "request": "^2.87.0"
+  }
+}
