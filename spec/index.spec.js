@@ -1,4 +1,6 @@
 import request from 'request';
+import app from '../server';
+
 
 describe('http://localhost:8080', () => {
   it('it should return hello everyone', done => {

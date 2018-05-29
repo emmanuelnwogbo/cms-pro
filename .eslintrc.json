@@ -1,5 +1,5 @@
 {
-    "extends": "airbnb-base",
+    "extends": ["airbnb-base", "plugin:jasmine/recommended"],
     "env": {
         "node": true,
         "es6": true,
@@ -30,6 +30,7 @@
         "indent": "off",
         "space-in-parens": "off",
         "function-paren-newline": "off",
-        "comma-dangle": "off"
+        "comma-dangle": "off",
+        "no-unused-vars": "off"
     }
 }
