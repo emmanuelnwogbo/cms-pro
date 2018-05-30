@@ -10,4 +10,4 @@ export default {
   checkSignupInputs,
   checkSigninInputs,
   authenticate
-}
+};

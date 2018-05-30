@@ -1,14 +1,13 @@
-import _ from 'lodash';
 import validator from 'validator';
 import Models from '../models';
 
 const {
   User
-} = Models
+} = Models;
 
 export default class Auth {
   static checkSignupInputs(req, res, next) {
-    let {
+    const {
       name,
       email,
       website,
@@ -36,7 +35,7 @@ export default class Auth {
   }
 
   static checkSigninInputs(req, res, next) {
-    let {
+    const {
       email,
       password
     } = req.body;
@@ -74,7 +73,7 @@ export default class Auth {
     }).catch(error => {
       res.status(401).send({
         message: `unauthorized: something went wrong`
-      })
+      });
     });
   }
 }

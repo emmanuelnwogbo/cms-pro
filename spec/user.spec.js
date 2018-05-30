@@ -1,7 +1,7 @@
 import request from 'request';
 import app from '../server';
 
-const endpoint = `http://localhost:8080/api/v1/auth`
+const endpoint = `http://localhost:8080/api/v1/auth`;
 
 
 describe('signup route', () => {
@@ -20,7 +20,7 @@ describe('signup route', () => {
       expect(res.statusCode).toEqual(403);
       expect(res.body).toEqual({
         error: `please make sure all fields are filled correctly`
-      })
+      });
       done();
     });
   });
@@ -39,7 +39,7 @@ describe('signup route', () => {
       expect(res.statusCode).toEqual(403);
       expect(res.body).toEqual({
         error: `please make sure all fields are filled correctly`
-      })
+      });
       done();
     });
   });
@@ -58,7 +58,7 @@ describe('signup route', () => {
       expect(res.statusCode).toEqual(403);
       expect(res.body).toEqual({
         error: `please make sure all fields are filled correctly`
-      })
+      });
       done();
     });
   });
@@ -77,7 +77,7 @@ describe('signup route', () => {
       expect(res.statusCode).toEqual(403);
       expect(res.body).toEqual({
         error: `please make sure all fields are filled correctly`
-      })
+      });
       done();
     });
   });
@@ -110,7 +110,7 @@ describe('signup route', () => {
     };
     request.delete(`http://localhost:8080/api/v1/auth/delete/78y7y27yy5y5y/76468767333/7664t6767t67`, (error, res) => {
       done();
-    })
+    });
     request.post(`${endpoint}/signup`, {
       json: true,
       body: user
@@ -135,7 +135,7 @@ describe('signin route', () => {
       expect(res.statusCode).toEqual(403);
       expect(res.body).toEqual({
         error: `please make sure all fields are filled correctly`
-      })
+      });
       done();
     });
   });
@@ -151,7 +151,7 @@ describe('signin route', () => {
       expect(res.statusCode).toEqual(403);
       expect(res.body).toEqual({
         error: `please make sure all fields are filled correctly`
-      })
+      });
       done();
     });
   });
@@ -177,10 +177,10 @@ describe('signout route', () => {
       headers: {
         'x-auth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjBlZWE2M2Q3NWJjYzRiNjg5ZmZkODgiLCJhY2Nlc3MiOiJ'
       }
-    }
+    };
     request.delete(options, (error, res) => {
       expect(res.statusCode).toEqual(401);
       done();
-    })
-  })
-})
+    });
+  });
+});
