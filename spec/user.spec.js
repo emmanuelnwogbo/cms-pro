@@ -168,4 +168,19 @@ describe('signin route', () => {
       done();
     });
   });
+});
+
+describe('signout route', () => {
+  it('should return 401 status', done => {
+    const options = {
+      url: `${endpoint}/signout`,
+      headers: {
+        'x-auth': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjBlZWE2M2Q3NWJjYzRiNjg5ZmZkODgiLCJhY2Nlc3MiOiJ'
+      }
+    }
+    request.delete(options, (error, res) => {
+      expect(res.statusCode).toEqual(401);
+      done();
+    })
+  })
 })

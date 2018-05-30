@@ -2,10 +2,12 @@ import Auth from './auth';
 
 const {
   checkSignupInputs,
-  checkSigninInputs
+  checkSigninInputs,
+  authenticate
 } = Auth;
 
 export default {
   checkSignupInputs,
-  checkSigninInputs
+  checkSigninInputs,
+  authenticate
 }

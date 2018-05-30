@@ -56,6 +56,18 @@ export default class UserControllers {
     })
   }
 
+  static signout(req, res, next) {
+    req.user.removeToken(req.token).then(() => {
+      res.status(200).send({
+        message: `successfully signed out`
+      })
+    }, () => {
+      res.status(400).send({
+        message: `something went wrong!`
+      })
+    });
+  }
+
   static deleteuserfortest(req, res) {
     if (req.path === '/delete/78y7y27yy5y5y/76468767333/7664t6767t67') {
       User.findOneAndRemove({
