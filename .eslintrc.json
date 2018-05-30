@@ -5,6 +5,9 @@
         "es6": true,
         "jasmine": true
     },
+    "globals": {
+        "app": true
+    },
     "rules": {
         "semi": "error",
         "quotes": ["off", "double"],
@@ -30,7 +33,6 @@
         "indent": "off",
         "space-in-parens": "off",
         "function-paren-newline": "off",
-        "comma-dangle": "off",
-        "no-unused-vars": "off"
+        "comma-dangle": "off"
     }
 }

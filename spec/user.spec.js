@@ -1,0 +1,123 @@
+import request from 'request';
+import app from '../server';
+
+const endpoint = `http://localhost:8080/api/v1/auth`
+
+
+describe('signup route', () => {
+  it('should return status 403 if inputs are empty', done => {
+    const user = {
+      name: "",
+      email: "emmanuel@gmail.com",
+      website: "emmanuel.com",
+      password: "emmanuel",
+      confirmpassword: "emmanuel"
+    };
+    request.post(`${endpoint}/signup`, {
+      json: true,
+      body: user
+    }, (error, res) => {
+      expect(res.statusCode).toEqual(403);
+      expect(res.body).toEqual({
+        error: `please make sure all fields are filled correctly`
+      })
+      done();
+    });
+  });
+  it('should return status 403 if inputs are numbers', done => {
+    const user = {
+      name: "1",
+      email: "emmanuel@gmail.com",
+      website: "emmanuel.com",
+      password: "emmanuel",
+      confirmpassword: "emmanuel"
+    };
+    request.post(`${endpoint}/signup`, {
+      json: true,
+      body: user
+    }, (error, res) => {
+      expect(res.statusCode).toEqual(403);
+      expect(res.body).toEqual({
+        error: `please make sure all fields are filled correctly`
+      })
+      done();
+    });
+  });
+  it('should return status 403 if email field does not contain actual email', done => {
+    const user = {
+      name: "emmanuel",
+      email: "emmanuelgmail.com",
+      website: "emmanuel.com",
+      password: "emmanuel",
+      confirmpassword: "emmanuel"
+    };
+    request.post(`${endpoint}/signup`, {
+      json: true,
+      body: user
+    }, (error, res) => {
+      expect(res.statusCode).toEqual(403);
+      expect(res.body).toEqual({
+        error: `please make sure all fields are filled correctly`
+      })
+      done();
+    });
+  });
+  it('should return status 403 if password !== confirmpassword', done => {
+    const user = {
+      name: "emmanuel",
+      email: "emmanuel@gmail.com",
+      website: "emmanuel.com",
+      password: "emmanuel",
+      confirmpassword: "emma"
+    };
+    request.post(`${endpoint}/signup`, {
+      json: true,
+      body: user
+    }, (error, res) => {
+      expect(res.statusCode).toEqual(403);
+      expect(res.body).toEqual({
+        error: `please make sure all fields are filled correctly`
+      })
+      done();
+    });
+  });
+  it('should not let two users have the same email or website', done => {
+    const user = {
+      name: "emmanuel",
+      email: "naijel@gmail.com",
+      website: "naijael.com",
+      password: "emmanuel",
+      confirmpassword: "emmanuel"
+    };
+    request.post(`${endpoint}/signup`, {
+      json: true,
+      body: user
+    }, (error, res) => {
+      expect(res.statusCode).toEqual(403);
+      expect(res.body).toEqual({
+        message: `looks like a user with your email or website already exists`
+      });
+      done();
+    });
+  });
+  it('should signup a user', done => {
+    const user = {
+      name: "rosemary jerry",
+      email: "rossy@gmail.com",
+      website: "rossyrossy.com",
+      password: "emmanuel",
+      confirmpassword: "emmanuel"
+    };
+    request.delete(`http://localhost:8080/api/v1/auth/delete/78y7y27yy5y5y/76468767333/7664t6767t67`, (error, res) => {
+      done();
+    })
+    request.post(`${endpoint}/signup`, {
+      json: true,
+      body: user
+    }, (error, res) => {
+      expect(res.statusCode).toEqual(201);
+      expect(res.body.message).toEqual(`you're logged in successfully`);
+      done();
+    });
+  });
+});
