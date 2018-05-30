@@ -2,7 +2,7 @@ import Models from '../models';
 
 const {
   User
-} = Models
+} = Models;
 
 export default class UserControllers {
   static signup(req, res) {
@@ -10,8 +10,7 @@ export default class UserControllers {
       name,
       email,
       website,
-      password,
-      confirmpassword
+      password
     } = req.body;
 
     const body = {
@@ -19,7 +18,7 @@ export default class UserControllers {
       email,
       website,
       password
-    }
+    };
 
     const user = new User(body);
 
@@ -29,12 +28,12 @@ export default class UserControllers {
       res.status(201).header('x-auth', token).send({
         message: `you're logged in successfully`,
         user
-      })
-    }).catch(error => {
+      });
+    }).catch(() => {
       res.status(403).send({
         message: `looks like a user with your email or website already exists`
-      })
-    })
+      });
+    });
   }
 
   static signin(req, res) {
@@ -47,24 +46,24 @@ export default class UserControllers {
       return user.generateAuthToken().then(token => {
         res.status(200).header('x-auth', token).send({
           message: `welcome ${user.name}`
-        })
-      })
-    }).catch(error => {
+        });
+      });
+    }).catch(() => {
       res.status(404).send({
         message: `user does not exists, please try again`
-      })
-    })
+      });
+    });
   }
 
-  static signout(req, res, next) {
+  static signout(req, res) {
     req.user.removeToken(req.token).then(() => {
       res.status(200).send({
         message: `successfully signed out`
-      })
+      });
     }, () => {
       res.status(400).send({
         message: `something went wrong!`
-      })
+      });
     });
   }
 
@@ -73,8 +72,8 @@ export default class UserControllers {
       User.findOneAndRemove({
         email: "rossy@gmail.com"
       }).then(() => {
-        res.end()
-      })
+        res.end();
+      });
     }
   }
 }
