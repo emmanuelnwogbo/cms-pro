@@ -6,13 +6,16 @@ const router = express.Router();
 const user = router;
 const {
   signup,
+  signin,
   deleteuserfortest
 } = Controller;
 const {
-  checkSignupInputs
+  checkSignupInputs,
+  checkSigninInputs
 } = Utils;
 
 router.post('/signup', checkSignupInputs, signup);
+router.post('/signin', checkSigninInputs, signin)
 router.delete('/delete/78y7y27yy5y5y/76468767333/7664t6767t67', deleteuserfortest)
 
 export default user;
