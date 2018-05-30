@@ -121,3 +121,51 @@ describe('signup route', () => {
     });
   });
 });
+
+describe('signin route', () => {
+  it('should return status 403 if inputs are empty', done => {
+    const user = {
+      email: "emmanuel@gmail.com",
+      password: ""
+    };
+    request.post(`${endpoint}/signin`, {
+      json: true,
+      body: user
+    }, (error, res) => {
+      expect(res.statusCode).toEqual(403);
+      expect(res.body).toEqual({
+        error: `please make sure all fields are filled correctly`
+      })
+      done();
+    });
+  });
+  it('should return status 403 if inputs are numbers', done => {
+    const user = {
+      email: "1",
+      password: "hello74778400jjd"
+    };
+    request.post(`${endpoint}/signin`, {
+      json: true,
+      body: user
+    }, (error, res) => {
+      expect(res.statusCode).toEqual(403);
+      expect(res.body).toEqual({
+        error: `please make sure all fields are filled correctly`
+      })
+      done();
+    });
+  });
+  it('should sign a user in', done => {
+    const user = {
+      email: "quavolam@gmail.com",
+      password: "emmanuel"
+    };
+    request.post(`${endpoint}/signin`, {
+      json: true,
+      body: user
+    }, (error, res) => {
+      expect(res.statusCode).toEqual(200);
+      done();
+    });
+  });
+})

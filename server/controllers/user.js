@@ -37,6 +37,25 @@ export default class UserControllers {
     })
   }
 
+  static signin(req, res) {
+    const {
+      email,
+      password
+    } = req.body;
+
+    User.findByCredentials(email, password).then(user => {
+      return user.generateAuthToken().then(token => {
+        res.status(200).header('x-auth', token).send({
+          message: `welcome ${user.name}`
+        })
+      })
+    }).catch(error => {
+      res.status(404).send({
+        message: `user does not exists, please try again`
+      })
+    })
+  }
+
   static deleteuserfortest(req, res) {
     if (req.path === '/delete/78y7y27yy5y5y/76468767333/7664t6767t67') {
       User.findOneAndRemove({

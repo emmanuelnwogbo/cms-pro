@@ -29,4 +29,29 @@ export default class Auth {
 
     next();
   }
+
+  static checkSigninInputs(req, res, next) {
+    let {
+      email,
+      password
+    } = req.body;
+
+    const inputs = [email, password];
+    const emptyInputs = inputs.filter(i => i.length < 1);
+    const numbers = inputs.filter(i => i++);
+
+    if (emptyInputs.length > 0 || numbers.length > 0) {
+      return res.status(403).send({
+        error: `please make sure all fields are filled correctly`
+      });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(403).send({
+        error: `please make sure all fields are filled correctly`
+      });
+    }
+
+    next();
+  }
 }

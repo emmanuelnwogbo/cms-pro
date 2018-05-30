@@ -1,9 +1,11 @@
 import Auth from './auth';
 
 const {
-  checkSignupInputs
+  checkSignupInputs,
+  checkSigninInputs
 } = Auth;
 
 export default {
-  checkSignupInputs
+  checkSignupInputs,
+  checkSigninInputs
 }
