@@ -17,16 +17,16 @@ const {
   user
 } = routes;
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
-}))
+}));
 
 app.use('/', index);
 app.use('/api/v1', index);
-app.use('/api/v1/auth', user)
+app.use('/api/v1/auth', user);
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.status(404).send({
     error: `Oops looks like that page doesn't exist`
   });
