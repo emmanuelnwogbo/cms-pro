@@ -65,6 +65,10 @@ const ItemSchema = new Schema({
   added: {
     type: String,
     default: `${moment().format('MMMM Do YYYY, h:mm:ss a')}`
+  },
+  itemType: {
+    type: String,
+    required: true
   }
 });
 
