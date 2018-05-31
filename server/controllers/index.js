@@ -1,4 +1,5 @@
 import UserControllers from './user';
+import ItemControllers from './item';
 
 const {
   signup,
@@ -7,9 +8,14 @@ const {
   deleteuserfortest
 } = UserControllers;
 
+const {
+  postitem
+} = ItemControllers;
+
 export default {
   signup,
   signin,
   signout,
-  deleteuserfortest
+  deleteuserfortest,
+  postitem
 };

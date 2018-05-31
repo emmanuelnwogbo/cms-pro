@@ -1,12 +1,12 @@
-import mongoose from '../db';
 import validator from 'validator';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
 import bcrypt from 'bcryptjs';
+import mongoose from '../db';
 
 const {
   Schema
-} = mongoose
+} = mongoose;
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -50,16 +50,16 @@ const UserSchema = new Schema({
 });
 
 UserSchema.methods.toJSON = function () {
-  let user = this;
-  let userObject = user.toObject();
+  const user = this;
+  const userObject = user.toObject();
 
   return _.pick(userObject, ['_id', 'email']);
 };
 
 UserSchema.methods.generateAuthToken = function () {
-  let user = this;
-  let access = 'auth';
-  let token = jwt.sign({
+  const user = this;
+  const access = 'auth';
+  const token = jwt.sign({
     _id: user._id.toHexString(),
     access
   }, process.env.JWT_SECRET).toString();
@@ -75,7 +75,7 @@ UserSchema.methods.generateAuthToken = function () {
 };
 
 UserSchema.methods.removeToken = function (token) {
-  let user = this;
+  const user = this;
 
   return user.update({
     $pull: {
@@ -87,13 +87,12 @@ UserSchema.methods.removeToken = function (token) {
 };
 
 UserSchema.statics.findByToken = function (token) {
-  let User = this;
+  const User = this;
   let decoded;
 
   try {
     decoded = jwt.verify(token, process.env.JWT_SECRET);
   } catch (e) {
-
     return Promise.reject();
   }
 
@@ -105,7 +104,7 @@ UserSchema.statics.findByToken = function (token) {
 };
 
 UserSchema.statics.findByCredentials = function (email, password) {
-  let User = this;
+  const User = this;
 
   return User.findOne({
     email
@@ -127,7 +126,7 @@ UserSchema.statics.findByCredentials = function (email, password) {
 };
 
 UserSchema.pre('save', function (next) {
-  let user = this;
+  const user = this;
 
   if (user.isModified('password')) {
     bcrypt.genSalt(10, (err, salt) => {

@@ -1,5 +1,6 @@
 import express from 'express';
 import user from './user';
+import item from './item';
 
 const router = express.Router();
 const index = router;
@@ -12,5 +13,6 @@ router.get('/', (req, res) => {
 
 export default {
   index,
-  user
-}
+  user,
+  item
+};
