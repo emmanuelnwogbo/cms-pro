@@ -1,9 +1,12 @@
 {
-    "extends": "airbnb-base",
+    "extends": ["airbnb-base"],
     "env": {
         "node": true,
         "es6": true,
         "jasmine": true
+    },
+    "globals": {
+        "app": true
     },
     "rules": {
         "semi": "error",
@@ -30,6 +33,10 @@
         "indent": "off",
         "space-in-parens": "off",
         "function-paren-newline": "off",
-        "comma-dangle": "off"
+        "comma-dangle": "off",
+        "no-unused-vars": "off",
+        "no-plusplus": "off",
+        "no-param-reassign": "off",
+        "quote-props": "off"
     }
 }
