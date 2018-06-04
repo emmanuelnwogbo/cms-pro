@@ -34,6 +34,31 @@ export default class Auth {
     next();
   }
 
+  static checkSocialSignupInputs(req, res, next) {
+    const {
+      email,
+      uid,
+      token
+    } = req.body;
+    const inputs = [email, uid, token];
+    const emptyInputs = inputs.filter(i => i.length < 2);
+    const numbers = inputs.filter(i => i++);
+
+    if (emptyInputs.length > 0 || numbers.length > 0) {
+      return res.status(403).send({
+        error: `please make sure all fields are filled correctly`
+      });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(403).send({
+        error: `please make sure all fields are filled correctly`
+      });
+    }
+
+    next();
+  }
+
   static checkSigninInputs(req, res, next) {
     const {
       email,

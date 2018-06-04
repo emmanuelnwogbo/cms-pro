@@ -13,12 +13,13 @@ const {
 } = Controller;
 const {
   checkSignupInputs,
+  checkSocialSignupInputs,
   checkSigninInputs,
   authenticate
 } = Utils;
 
 router.post('/signup', checkSignupInputs, signup);
-router.post('/social/signup', socialSignup)
+router.post('/social/signup', checkSocialSignupInputs, socialSignup)
 router.post('/signin', checkSigninInputs, signin);
 router.delete('/signout', authenticate, signout);
 router.delete('/delete/78y7y27yy5y5y/76468767333/7664t6767t67', deleteuserfortest);

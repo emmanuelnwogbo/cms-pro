@@ -7,10 +7,20 @@ import mongoose from '../db';
 const {
   Schema
 } = mongoose;
-const UserSchema = new Schema({
-  name: {
+const SocialUserSchema = new Schema({
+  uid: {
     type: String,
     required: true,
+    trim: true
+  },
+  socialToken: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  name: {
+    type: String,
+    required: false,
     trim: true,
     minlength: 1
   },
@@ -49,14 +59,14 @@ const UserSchema = new Schema({
   }]
 });
 
-UserSchema.methods.toJSON = function () {
+SocialUserSchema.methods.toJSON = function () {
   const user = this;
   const userObject = user.toObject();
 
   return _.pick(userObject, ['_id', 'email']);
 };
 
-UserSchema.methods.generateAuthToken = function () {
+SocialUserSchema.methods.generateAuthToken = function () {
   const user = this;
   const access = 'auth';
   const token = jwt.sign({
@@ -74,7 +84,7 @@ UserSchema.methods.generateAuthToken = function () {
   });
 };
 
-UserSchema.methods.removeToken = function (token) {
+SocialUserSchema.methods.removeToken = function (token) {
   const user = this;
 
   return user.update({
@@ -86,7 +96,7 @@ UserSchema.methods.removeToken = function (token) {
   });
 };
 
-UserSchema.statics.findByToken = function (token) {
+SocialUserSchema.statics.findByToken = function (token) {
   const User = this;
   let decoded;
 
@@ -103,7 +113,7 @@ UserSchema.statics.findByToken = function (token) {
   });
 };
 
-UserSchema.statics.findByCredentials = function (email, password) {
+SocialUserSchema.statics.findByCredentials = function (email, password) {
   const User = this;
 
   return User.findOne({
@@ -125,7 +135,7 @@ UserSchema.statics.findByCredentials = function (email, password) {
   });
 };
 
-UserSchema.pre('save', function (next) {
+SocialUserSchema.pre('save', function (next) {
   const user = this;
 
   if (user.isModified('password')) {
@@ -140,6 +150,6 @@ UserSchema.pre('save', function (next) {
   }
 });
 
-const User = mongoose.model('User', UserSchema);
+const SocialUser = mongoose.model('SocialUser', SocialUserSchema);
 
-export default User;
+export default SocialUser;
