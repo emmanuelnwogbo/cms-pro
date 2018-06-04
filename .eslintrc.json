@@ -36,6 +36,7 @@
         "comma-dangle": "off",
         "no-unused-vars": "off",
         "no-plusplus": "off",
-        "no-param-reassign": "off"
+        "no-param-reassign": "off",
+        "quote-props": "off"
     }
 }

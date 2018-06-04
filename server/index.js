@@ -14,9 +14,15 @@ const {
 
 const {
   index,
-  user
+  user,
+  item
 } = routes;
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
@@ -25,6 +31,7 @@ app.use(bodyParser.urlencoded({
 app.use('/', index);
 app.use('/api/v1', index);
 app.use('/api/v1/auth', user);
+app.use('/api/v1/item', item);
 
 app.use((req, res, next) => {
   res.status(404).send({

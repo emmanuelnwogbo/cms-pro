@@ -1,7 +1,8 @@
 import Models from '../models';
 
 const {
-  User
+  User,
+  SocialUser
 } = Models;
 
 export default class UserControllers {
@@ -32,6 +33,34 @@ export default class UserControllers {
     }).catch(() => {
       res.status(403).send({
         message: `looks like a user with your email or website already exists`
+      });
+    });
+  }
+
+  static socialSignup(req, res) {
+    const {
+      uid,
+      token,
+      email
+    } = req.body;
+
+    const user = new SocialUser({
+      uid,
+      socialToken: token,
+      email,
+      password: uid
+    })
+
+    user.save().then(() => {
+      return user.generateAuthToken();
+    }).then(token => {
+      res.status(201).header('x-auth', token).send({
+        message: `you're logged in successfully`,
+        user
+      });
+    }).catch(() => {
+      res.status(403).send({
+        message: `looks like something went wrong, please try signing up again`
       });
     });
   }

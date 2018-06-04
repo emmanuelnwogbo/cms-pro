@@ -108,7 +108,7 @@ describe('signup route', () => {
       password: "emmanuel",
       confirmpassword: "emmanuel"
     };
-    request.delete(`http://localhost:8080/api/v1/auth/delete/78y7y27yy5y5y/76468767333/7664t6767t67`, (error, res) => {
+    request.delete(`${endpoint}/delete/78y7y27yy5y5y/76468767333/7664t6767t67`, (error, res) => {
       done();
     });
     request.post(`${endpoint}/signup`, {
