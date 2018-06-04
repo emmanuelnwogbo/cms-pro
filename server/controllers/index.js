@@ -3,6 +3,7 @@ import ItemControllers from './item';
 
 const {
   signup,
+  socialSignup,
   signin,
   signout,
   deleteuserfortest
@@ -14,6 +15,7 @@ const {
 
 export default {
   signup,
+  socialSignup,
   signin,
   signout,
   deleteuserfortest,

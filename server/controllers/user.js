@@ -36,6 +36,10 @@ export default class UserControllers {
     });
   }
 
+  static socialSignup(req, res) {
+    console.log(req.body);
+  }
+
   static signin(req, res) {
     const {
       email,
